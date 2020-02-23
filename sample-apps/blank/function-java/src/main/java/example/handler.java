@@ -15,8 +15,9 @@ public class Handler implements RequestHandler<SQSEvent, String>{
     LambdaLogger logger = context.getLogger();
     logger.log(event.toString());
     logger.log(context.toString());
-    
+    for(SQSMessage msg : event.getRecords()){
+      logger.log(new String(msg.getBody()));
+    }
     return "HELLO";
-    //return String.format("Hello %s.", event.getRecords().getMessageId());
   }
 }
