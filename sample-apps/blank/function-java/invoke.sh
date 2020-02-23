@@ -1,1 +1,1 @@
-aws lambda invoke --function-name java-sqs --payload file://event.json out
+aws lambda invoke --function-name blank-java --payload file://event.json out

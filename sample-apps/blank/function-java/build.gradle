@@ -1,14 +1,14 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile (
-        'com.amazonaws:aws-lambda-java-core:1.2.0',
-        'com.amazonaws:aws-lambda-java-events:2.2.7'
-    )
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
+    implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
 }
 
 task buildZip(type: Zip) {
@@ -17,6 +17,11 @@ task buildZip(type: Zip) {
     into('lib') {
         from configurations.runtimeClasspath
     }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 build.dependsOn buildZip
