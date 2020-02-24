@@ -21,15 +21,10 @@ public class Handler implements RequestHandler<SQSEvent, String>{
   {
     LambdaLogger logger = context.getLogger();
     logger.log("EVENT: " + gson.toJson(event));
-    logger.log("ENVIRONMENT VARIABLES: ");
-
-    Map<String, String> env = System.getenv();
-    StringBuilder envs = new StringBuilder();
-    env.forEach((key, value) -> envs.append(key + ": " + value + "\n"));
-    logger.log(envs.toString());
-
+    logger.log("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
+    logger.log("CONTEXT: " + gson.toJson(context));
     for(SQSMessage msg : event.getRecords()){
-      logger.log(new String(msg.getBody()));
+      logger.log(msg.getBody());
     }
     return context.getAwsRequestId();
   }
