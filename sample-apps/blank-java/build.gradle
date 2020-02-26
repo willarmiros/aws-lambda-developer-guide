@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform('software.amazon.awssdk:bom:2.5.29')
+    implementation platform('software.amazon.awssdk:bom:2.10.73')
     implementation 'software.amazon.awssdk:lambda'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
     implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'

@@ -33,9 +33,10 @@ public class Handler implements RequestHandler<SQSEvent, String>{
   @Override
   public String handleRequest(SQSEvent event, Context context)
   {
-    //LambdaLogger logger = context.getLogger();
+    LambdaLogger logger2 = context.getLogger();
+    logger2.log("TEST LOGS");
     // call Lambda API
-    logger.info("Getting account setting");
+    logger.info("Getting account settings");
     CompletableFuture<GetAccountSettingsResponse> accountSettings = 
         lambdaClient.getAccountSettings(GetAccountSettingsRequest.builder().build());
     // log execution details
