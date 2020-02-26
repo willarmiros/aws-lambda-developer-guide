@@ -27,11 +27,9 @@ public class TestContext implements Context{
     return new String("arn:aws:lambda:us-east-2:123456789012:function:my-function");
   }
   public CognitoIdentity getIdentity(){
-    //return new TestCognitoIdentity();
     return null;
   }
   public ClientContext getClientContext(){
-    //return new TestClientContext();
     return null;
   }
   public int getRemainingTimeInMillis(){

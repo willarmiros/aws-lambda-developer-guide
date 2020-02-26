@@ -15,12 +15,16 @@ import software.amazon.awssdk.services.lambda.model.AccountUsage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+ 
 import java.lang.StringBuilder;
 import java.util.Map;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class Handler implements RequestHandler<SQSEvent, String>{
+  private static final Logger logger = LoggerFactory.getLogger(Handler.class);
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
   LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
@@ -29,23 +33,23 @@ public class Handler implements RequestHandler<SQSEvent, String>{
   @Override
   public String handleRequest(SQSEvent event, Context context)
   {
-    LambdaLogger logger = context.getLogger();
+    //LambdaLogger logger = context.getLogger();
     // call Lambda API
-    logger.log("Getting account settings");
+    logger.info("Getting account setting");
     CompletableFuture<GetAccountSettingsResponse> accountSettings = 
         lambdaClient.getAccountSettings(GetAccountSettingsRequest.builder().build());
     // log execution details
-    logger.log("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
-    logger.log("CONTEXT: " + gson.toJson(context));
+    logger.info("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
+    logger.info("CONTEXT: " + gson.toJson(context));
     // process event
-    logger.log("EVENT: " + gson.toJson(event));
+    logger.info("EVENT: " + gson.toJson(event));
     for(SQSMessage msg : event.getRecords()){
-      logger.log(msg.getBody());
+      logger.info(msg.getBody());
     }
 
     try {
       GetAccountSettingsResponse settings = accountSettings.get();
-      logger.log("Account usage:" + gson.toJson(settings.accountUsage()));
+      logger.info("Account usage:" + gson.toJson(settings.accountUsage()));
     } catch(Exception e) {
       e.getStackTrace();
     }
