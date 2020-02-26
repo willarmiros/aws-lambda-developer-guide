@@ -24,7 +24,7 @@ public class Handler implements RequestHandler<SQSEvent, String>{
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
   LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
-
+  public Handler(){}
   // example.Handler::handleRequest
   @Override
   public String handleRequest(SQSEvent event, Context context)
