@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.ArrayList;
 
 class InvokeTest {
   //private static final Logger logger = LoggerFactory.getLogger(Handler.class);
@@ -25,7 +26,7 @@ class InvokeTest {
   @Test
   void invokeTest() {
     SQSEvent event = new SQSEvent();
-    event.setRecords(new List<SQSMessage>());
+    event.setRecords(new ArrayList<SQSMessage>());
     Context context = new TestContext();
     String requestId = context.getAwsRequestId();
     Handler handler = new Handler();
