@@ -33,6 +33,7 @@ public class Handler implements RequestHandler<SQSEvent, String>{
   @Override
   public String handleRequest(SQSEvent event, Context context)
   {
+    String response = new String();
     // call Lambda API
     logger.info("Getting account settings");
     CompletableFuture<GetAccountSettingsResponse> accountSettings = 
@@ -45,13 +46,14 @@ public class Handler implements RequestHandler<SQSEvent, String>{
     for(SQSMessage msg : event.getRecords()){
       logger.info(msg.getBody());
     }
-
+    // process Lambda API response
     try {
       GetAccountSettingsResponse settings = accountSettings.get();
-      logger.info("Account usage:" + gson.toJson(settings.accountUsage()));
+      response = gson.toJson(settings.accountUsage());
+      logger.info("Account usage:" + response);
     } catch(Exception e) {
       e.getStackTrace();
     }
-    return context.getAwsRequestId();
+    return response;
   }
 }
