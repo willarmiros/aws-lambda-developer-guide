@@ -26,9 +26,7 @@ import java.util.concurrent.CompletableFuture;
 public class Handler implements RequestHandler<SQSEvent, String>{
   private static final Logger logger = LoggerFactory.getLogger(Handler.class);
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
   LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
-  public Handler(){}
   // example.Handler::handleRequest
   @Override
   public String handleRequest(SQSEvent event, Context context)
