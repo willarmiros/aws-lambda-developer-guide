@@ -9,7 +9,7 @@ public class TestContext implements Context{
 
   public TestContext() {}
   public String getAwsRequestId(){
-    return new String("495b12a8-xmpl-4eca-8168-160484189f99");  
+    return new String("495b12a8-xmpl-4eca-8168-160484189f99");
   }
   public String getLogGroupName(){
     return new String("/aws/lambda/my-function");
